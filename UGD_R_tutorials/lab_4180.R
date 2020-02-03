@@ -18,14 +18,14 @@ getwd() #this is where you are in your computer
 # we will be using the Tidyverse to explore R 
 # the Tidyverse is a family of packages, all support each other seamlessly 
 
-library(tidyverse)
-library(dplyr)
+library(tidyverse) # see the packages attached
 
 ##########################################
 # how to assign variables - let's input our own data
 # imagine we run an experiment on 5 people where we give them a specific diet and follow how their
 # weight changes in the next 3 months
 
+# let's first write a few vectors
 subject <- c(1:5, 1:5, 1:5) # here we have 5 subjects
 time_mth <- c(1, 1, 1, 1, 1, # each subject gives us data from 3 different time points  
              2, 2, 2, 2, 2,
@@ -46,13 +46,11 @@ weight_kg %>% mean()
 head(weight_df)
 boxplot(weight_kg ~ time_mth , data = weight_df) # left side is dependent variable
 
-tab1 <- tableby( time_mth ~ weight_kg , data= weight_df)
-yy <- summary(tab1, text = TRUE)
-write2html(yy, 'yy.html')
+library(psych) # this package has a handy function for getting descriptive statistics
+describeBy(weight_df, group = time_mth)
 
 ##########################################
 # plotting data
-library(ggplot2) # this is a plotting package
 
 weight_df <- weight_df %>% 
   group_by(time_mth) %>% # for every time point, calculate the MEAN, STDEV, STANDARD ERROR
@@ -126,9 +124,8 @@ wdf <- wdf %>%
 head(wdf)
 boxplot(weight_kg ~ time_mth + diet, data = wdf)
 
-tab2 <- tableby(diet ~ weight_kg, data = wdf)
-yy2 <- summary(tab2, text = TRUE)
-write2html(yy2, 'yy2.html')
+# let's get the descriptive statistics
+describeBy(wdf, group = c('time_mth', 'diet'))
 
 # stats - include now an interaction term factor1*factor2
 rm_mod2 <- aov(weight_kg ~ time_mth + diet + time_mth*diet + Error(subject/time_mth),
