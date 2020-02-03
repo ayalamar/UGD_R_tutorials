@@ -111,6 +111,7 @@ t.test(weight_df$weight_kg[which(weight_df$time_mth == 2)],
 # using the same data set we will now add a new factor
 # what if we have another group whose weight we tracked but didn't get a diet (i.e. our controls)
 
+# https://www.dropbox.com/s/3r5g9lskjzkqvie/lab_4180_data1.csv?dl=0
 wdf <- read.csv('lab_4180_data1.csv', header = TRUE)
 
 # let's add labels and means that will be used for plots later
