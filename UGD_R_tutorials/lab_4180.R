@@ -9,6 +9,7 @@
 # check out R studio workspace
 
 getwd() #this is where you are in your computer
+#let's set up a project to keep things tidy --> get a default working directory
 
 ##########################################
 # what are packages? 
@@ -135,8 +136,7 @@ describeBy(wdf, group = c('time_mth', 'diet'))
 # stats - include now an interaction term factor1*factor2
 rm_mod2 <- aov(weight_kg ~ time_mth + diet + time_mth*diet + Error(subject/time_mth),
                data = wdf)
-summary(rm_mod2) # there is a significant effect of time on weight (F(1,24) = 49.21, p < .05), 
-# and diet on weight (F(1,24) = 30.76, p < .05)
+summary(rm_mod2) 
 
 # posthoc - since we saw an effect of interaction
 # do a posthoc for each main effect - not necessary for diet since there's only two,
