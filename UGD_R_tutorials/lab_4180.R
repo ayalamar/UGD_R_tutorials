@@ -143,18 +143,18 @@ summary(rm_mod2)
 # do it for the other factor
 
 # month 1 vs. month 2 - PAIRWISE T TESTS
-t.test(weight_df$weight_kg[which(weight_df$time_mth == 1)],
+t.test(wdf$weight_kg[which(wdf$time_mth == 1)],
        weight_df$weight_kg[which(weight_df$time_mth == 2)],
        paired = TRUE)
 
 # month 1 vs. month 3
-t.test(weight_df$weight_kg[which(weight_df$time_mth == 1)],
-       weight_df$weight_kg[which(weight_df$time_mth == 3)],
+t.test(wdf$weight_kg[which(wdf$time_mth == 1)],
+       wdf$weight_kg[which(wdf$time_mth == 3)],
        paired = TRUE)
 
 # month 2 vs. month 3
-t.test(weight_df$weight_kg[which(weight_df$time_mth == 2)],
-       weight_df$weight_kg[which(weight_df$time_mth == 3)],
+t.test(wdf$weight_kg[which(wdf$time_mth == 2)],
+       wdf$weight_kg[which(wdf$time_mth == 3)],
        paired = TRUE)
 
 # control for type 1 error, bonferroni correction 0.05/3 comparisons, alpha = 0.017
