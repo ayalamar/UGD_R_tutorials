@@ -18,6 +18,7 @@ getwd() #this is where you are in your computer
 # we will be using the Tidyverse to explore R 
 # the Tidyverse is a family of packages, all support each other seamlessly 
 
+# install.packages("tidyverse")
 library(tidyverse) # see the packages attached
 
 ##########################################
@@ -56,7 +57,7 @@ weight_df <- weight_df %>%
   group_by(time_mth) %>% # for every time point, calculate the MEAN, STDEV, STANDARD ERROR
   mutate(mean_kg = mean(weight_kg), # this function "mutates" a new column with the new calculations
          sd_kg = sd(weight_kg),
-         sem_kg = sd_kg/(sqrt(15)))
+         sem_kg = sd_kg/(sqrt(5)))
             
 ggplot(weight_df, aes(x = time_mth, y = weight_kg)) +
   geom_bar(stat = "summary", fun.y = "mean") +
@@ -93,15 +94,18 @@ summary(rm_mod1)
 # if it's significant, do post-hoc testing 
 # month 1 vs. month 2
 t.test(weight_df$weight_kg[which(weight_df$time_mth == 1)],
-       weight_df$weight_kg[which(weight_df$time_mth == 2)])
+       weight_df$weight_kg[which(weight_df$time_mth == 2)],
+       paired = TRUE)
 
 # month 1 vs. month 3
 t.test(weight_df$weight_kg[which(weight_df$time_mth == 1)],
-       weight_df$weight_kg[which(weight_df$time_mth == 3)])
+       weight_df$weight_kg[which(weight_df$time_mth == 3)],
+       paired = TRUE)
 
 # month 2 vs. month 3
 t.test(weight_df$weight_kg[which(weight_df$time_mth == 2)],
-       weight_df$weight_kg[which(weight_df$time_mth == 3)])
+       weight_df$weight_kg[which(weight_df$time_mth == 3)],
+       paired = TRUE)
 # account for type 1 error - bonferroni p level control
 # 0.05 / 3 = 0.0167 ; all are significant at this level
 
